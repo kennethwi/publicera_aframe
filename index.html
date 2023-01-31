@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+
+<script src="simple-navmesh-constraint.js"></script>
+
+</head>
+<body style="background-color:#eeeeee">
+    <a-scene>
+        <a-assets>
+
+                <!--FUNKAR också BRA -->
+                <a-asset-item id="BUILDING" src="dung22.gltf"></a-asset-item>
+                       
+        </a-assets>
+
+        <!-- <a-gltf-model class="navmesh" src="#navmesh"  material="color: green"></a-gltf-model> -->
+        <a-gltf-model src="#BUILDING" class="navmesh" id="building"
+          lightmap="src:#bake;intensity: 1.5; filter:Window,Ceiling,floor;" depthwrite="true"
+          window-replace="Glass" no-tonemapping="Light" shadow="cast:false;receive:true;"></a-gltf-model>
+            <a-entity
+            id="cameraRig"
+            simple-navmesh-constraint="navmesh:.navmesh;fall:0.5;height:0;exclude:.navmesh-hole;"
+            movement-controls="speed:0.45;camera:#head;"
+            look-controls wasd-controls="acceleration:100"
+            position="2 10 1" rotation="0 45 0" origin-on-ar-start
+          >
+
+            <!-- camera -->
+            <a-entity id="head"
+              camera="near:0.01;"
+              look-controls="pointerLockEnabled: false"
+              position="0 1.65 0"
+            ></a-entity>
+          </a-entity>
+            </a-scene>
+        </body>
+</html>
